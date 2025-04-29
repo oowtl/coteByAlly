@@ -13,4 +13,11 @@ s_coord = sorted(coordinates)
 
 for i in range(T):
 
-    print("{} {}".format(s_coord[i][0], s_coord[i][1]))
+    print(s_coord[i][0], s_coord[i][1])
+
+"""
+시간 복잡도 계산 디테일
+- 문제를 보고 1억의 시간 복잡도가 나오면(시간 초과로 인한 실패 기준) 상수항이나 연산 횟수를 상세하게 계산해야 한다.
+-> 상수항으로 인해서 시간 초과가 날 수도 있기 때문
+
+"""
