@@ -45,11 +45,6 @@ k 가 10^18 이면? 이건 단순히 순회로는 불가능하다. 일반적인 
 k 가 홀수이면 2로 나눈 숫자의 반올림한 순서 숫자는 같다.
 k 가 짝수이면 2로 나눈 숫자는 반대이다.
 
-
-make_sentence(1) = 0
-make_sentence(2) = 1
-make_sentence(3) = 1 
-
 def check_string(문자열의 인덱스 n):
     # base case
     1. n == 1 return 0
@@ -59,27 +54,36 @@ def check_string(문자열의 인덱스 n):
     # recursive case
     1. n 이 짝수인지 확인 => 짝수이면 숫자 바꾸기
     2. n 이 홀수이면 그대로
+    
+글자 1번째를 인덱스 1로 잡고 풀었다. 그런데 이렇게 하면 홀수 점화식이 무너지게 된다. f(1) = 0, f(3) = 1
+그래서 인덱스를 0부터 시작하는 것으로 바꾸면 성립
+
+짝수
+make_sentence(0) = 0
+make_sentence(2) = 1
+make_sentence(4) = 1
+
+홀수
+make_sentence(1) = 1
+make_sentence(3) = 0
+make_sentence(5) = 0
+
 """
 
 k = int(input())
 
 def check_string(n):
     # base case
-    if n == 1:
+    if n == 0:
         return 0
-    elif n == 2:
+    elif n == 1:
         return 1
 
     # recursice case
     elif n % 2 == 0: # 짝수 : 반대
+        return check_string(n // 2)
+    return 1 - check_string(n // 2)
 
-        # 이런식으로 리턴하면 안된다. 다른 값을 계산해야하는데 바로 반환해버림
-        # if check_string(n // 2) == 0:
-        #     return 1
-        # return 0
 
-        return 1 - check_string(n // 2)
-    return check_string(n // 2)
-
-s = check_string(k)
+s = check_string(k - 1)
 print(s)
